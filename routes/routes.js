@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-import { getPosts, createPost, showPostById, showUpdateForm, updatePost, showDeleteForm, deletePost } from "../controllers/blogPostController.js";
+import { getPosts, createPost, showPostById, showUpdateForm, updatePost, showDeleteForm, deletePost, addComment } from "../controllers/blogPostController.js";
 
 router.get("/", getPosts);
 router.post("/create", createPost);
@@ -11,7 +11,8 @@ router.get("/posts/:id", showPostById);
 router.get("/posts/:id/edit", showUpdateForm);
 router.put("/posts/:id", updatePost);
 router.get("/posts/:id/delete",showDeleteForm );
-router.delete("/posts/:id", deletePost)
+router.delete("/posts/:id", deletePost);
+router.post("/posts/:id/comments", addComment); 
 
 
 

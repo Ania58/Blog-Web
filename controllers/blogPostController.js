@@ -78,7 +78,23 @@ const deletePost = async (req, res) => {
 }
 
 
+const addComment = async (req, res) => {
+    try {
+        const { username, text } = req.body;
+        const postId = req.params.id;
+        const post = await BlogPost.findById(postId);
+
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+        post.comments.push({ username, text });
+        await post.save();
+        res.redirect(`/posts/${postId}`);
+    } catch (error) {
+        console.error('Error adding a comment:', error);
+        res.status(500).json({ message: "There was a problem trying to add a comment" });
+    }
+}
 
 
-
-export { getPosts, createPost, showPostById, showUpdateForm, updatePost, showDeleteForm, deletePost };
+export { getPosts, createPost, showPostById, showUpdateForm, updatePost, showDeleteForm, deletePost, addComment };
