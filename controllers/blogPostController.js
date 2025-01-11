@@ -21,6 +21,15 @@ const createPost = async (req, res) => {
     }
 }
 
+const showPostById = async (req, res) => {
+    try {
+        const post = await BlogPost.findById(req.params.id).select('title content');
+        res.render("showPost.ejs", { post })
+    } catch (error) {
+        console.error('Error creating post:', error);
+        res.status(500).json({ message: "There was a problem trying to fetch a post" });
+    }
+}
 
 
 
@@ -29,5 +38,4 @@ const createPost = async (req, res) => {
 
 
 
-
-export { getPosts, createPost };
+export { getPosts, createPost, showPostById };
