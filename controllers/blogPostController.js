@@ -31,11 +31,19 @@ const showPostById = async (req, res) => {
     }
 }
 
+const updatePost = async (req, res) => {
+    try {
+        const { title, content } = req.body;
+        const post = await BlogPost.findByIdAndUpdate(req.params.id, { title, content })
+    } catch (error) {
+        console.error('Error creating post:', error);
+        res.status(500).json({ message: "There was a problem trying to update a post" });
+    }
+}
 
 
 
 
 
 
-
-export { getPosts, createPost, showPostById };
+export { getPosts, createPost, showPostById, updatePost };
