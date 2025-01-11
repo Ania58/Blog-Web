@@ -23,7 +23,7 @@ const createPost = async (req, res) => {
 
 const showPostById = async (req, res) => {
     try {
-        const post = await BlogPost.findById(req.params.id).select('title content');
+        const post = await BlogPost.findById(req.params.id).select('title content comments');
         res.render("showPost.ejs", { post })
     } catch (error) {
         console.error('Error fetching post:', error);
@@ -96,5 +96,48 @@ const addComment = async (req, res) => {
     }
 }
 
+const updateComment = async (req, res) => {
+    try {
+        const { id, commentId } = req.params; 
+        const { text } = req.body;
+    
+        const post = await BlogPost.findOneAndUpdate(
+          { _id: id, "comments._id": commentId }, 
+          { $set: { "comments.$.text": text } }, 
+          { new: true } 
+        );
+  
+      if (!post) {
+        return res.status(404).send("Post or comment not found");
+      }
+  
+      res.redirect(`/posts/${id}`); 
+    } catch (error) {
+      console.error("Error updating comment:", error);
+      res.status(500).json({ message: "There was a problem updating the comment." });
+    }
+  };
 
-export { getPosts, createPost, showPostById, showUpdateForm, updatePost, showDeleteForm, deletePost, addComment };
+  const deleteComment = async (req, res) => {
+    try {
+      const { id, commentId } = req.params; 
+  
+      const post = await BlogPost.findByIdAndUpdate(
+        id, 
+        { $pull: { comments: { _id: commentId } } }, 
+        { new: true } 
+      );
+  
+      if (!post) {
+        return res.status(404).send("Post or comment not found");
+      }
+  
+      res.redirect(`/posts/${id}`);
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+      res.status(500).json({ message: "There was a problem deleting the comment." });
+    }
+  };
+
+
+export { getPosts, createPost, showPostById, showUpdateForm, updatePost, showDeleteForm, deletePost, addComment, updateComment, deleteComment };
