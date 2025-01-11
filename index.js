@@ -1,6 +1,6 @@
 import express from 'express';
 import router from './routes/routes.js';
-import { dbConnection } from './config/db';
+import { dbConnection } from './config/db.js';
 import dotenv from 'dotenv';
 
 
