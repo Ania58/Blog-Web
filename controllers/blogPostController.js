@@ -26,7 +26,7 @@ const showPostById = async (req, res) => {
         const post = await BlogPost.findById(req.params.id).select('title content');
         res.render("showPost.ejs", { post })
     } catch (error) {
-        console.error('Error creating post:', error);
+        console.error('Error fetching post:', error);
         res.status(500).json({ message: "There was a problem trying to fetch a post" });
     }
 }
@@ -37,20 +37,45 @@ const showUpdateForm = async (req, res) => {
         const post = await BlogPost.findByIdAndUpdate(req.params.id, { title, content })
         res.render("updatePost.ejs", { post })
     } catch (error) {
-        console.error('Error creating post:', error);
+        console.error('Error updating post:', error);
         res.status(500).json({ message: "There was a problem trying to update a post" });
     }
 }
 
 const updatePost = async (req, res) => {
-    const { title, content } = req.body;
-    await BlogPost.findByIdAndUpdate(req.params.id, { title, content });
-    res.redirect(`/posts/${req.params.id}`);
+    try {
+        const { title, content } = req.body;
+        await BlogPost.findByIdAndUpdate(req.params.id, { title, content });
+        res.redirect(`/posts/${req.params.id}`);
+    } catch (error) {
+        console.error('Error updating post:', error);
+        res.status(500).json({ message: "There was a problem trying to update a post" });
+    }
   };
 
+const showDeleteForm = async (req, res) => {
+    try {
+        const post = await BlogPost.findByIdAndDelete(req.params.id);
+        res.render("deletePost.ejs", { post });
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        res.status(500).json({ message: "There was a problem trying to delete a post" });
+    }
+}
+
+
+const deletePost = async (req, res) => {
+    try {
+        await BlogPost.findByIdAndDelete(req.params.id);
+        res.redirect("/");
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        res.status(500).json({ message: "There was a problem trying to delete a post" });
+    }
+}
 
 
 
 
 
-export { getPosts, createPost, showPostById, showUpdateForm, updatePost };
+export { getPosts, createPost, showPostById, showUpdateForm, updatePost, showDeleteForm, deletePost };
