@@ -7,7 +7,7 @@ import { getPosts, createPost, showPostById } from "../controllers/blogPostContr
 router.get("/", getPosts);
 router.post("/create", createPost);
 router.get("/create", (req, res) => res.render("createPost.ejs"));
-router.get("/:id", showPostById)
+router.get("/posts/:id", showPostById)
 
 
 
