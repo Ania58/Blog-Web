@@ -31,19 +31,26 @@ const showPostById = async (req, res) => {
     }
 }
 
-const updatePost = async (req, res) => {
+const showUpdateForm = async (req, res) => {
     try {
         const { title, content } = req.body;
         const post = await BlogPost.findByIdAndUpdate(req.params.id, { title, content })
+        res.render("updatePost.ejs", { post })
     } catch (error) {
         console.error('Error creating post:', error);
         res.status(500).json({ message: "There was a problem trying to update a post" });
     }
 }
 
+const updatePost = async (req, res) => {
+    const { title, content } = req.body;
+    await BlogPost.findByIdAndUpdate(req.params.id, { title, content });
+    res.redirect(`/posts/${req.params.id}`);
+  };
 
 
 
 
 
-export { getPosts, createPost, showPostById, updatePost };
+
+export { getPosts, createPost, showPostById, showUpdateForm, updatePost };

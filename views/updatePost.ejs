@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Blog Web</title>
+</head>
+<body>
+    <%- include ("navigation") %>
+    <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
+        <label for="title">Edit Title</label>
+        <input id="title" name="title" type="text" value="<%= post.title %>" required />
+
+        <label for="content">Edit Content</label>
+        <textarea id="content" name="content" rows="10" cols="50" required><%= post.content %></textarea>
+
+        <button type="submit">Update Post</button>
+    </form>
+</body>
+</html>
