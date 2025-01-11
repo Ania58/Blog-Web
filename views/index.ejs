@@ -7,11 +7,12 @@
     <title>Blog Web</title>
 </head>
 <body>
-    <form>
+    <form action="/create" method="post">
         <label for="title">Title</label>
-        <input id="title" name="title" />
+        <input id="title" name="title" type="text" required/>
         <label for="content">Your blog post content</label>
-        <input id="content" name="content" />
+        <textarea id="content" name="content" rows="10" cols="50" required></textarea>
+        <input type="submit" value="Post" />
     </form>
 </body>
 </html>

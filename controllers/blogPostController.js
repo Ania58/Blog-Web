@@ -9,6 +9,16 @@ const getPosts = async (req, res) => {
     }
 }
 
+const createPost = async (req, res) => {
+    try {
+        const title = req.body["title"];
+        const content = req.body["content"];
+        const post = await BlogPost.create({title, content});
+    } catch (error) {
+        console.error('Error creating post:', error);
+        res.status(500).json({ message: "There was a problem trying to create a post" });
+    }
+}
 
 
 
@@ -18,4 +28,5 @@ const getPosts = async (req, res) => {
 
 
 
-export default getPosts;
+
+export { getPosts, createPost };
