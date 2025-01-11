@@ -56,6 +56,9 @@ const updatePost = async (req, res) => {
 const showDeleteForm = async (req, res) => {
     try {
         const post = await BlogPost.findByIdAndDelete(req.params.id);
+        if (!post) {
+            return res.status(404).send("Post not found");
+          }
         res.render("deletePost.ejs", { post });
     } catch (error) {
         console.error('Error deleting post:', error);
