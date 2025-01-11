@@ -1,12 +1,14 @@
 <%- include ("layout") %>
 <body>
     <%- include ("navigation") %>
-    <h1>Are you sure you want to delete this post?</h1>
-    <h2><%= post.title %></h2>
-    <p><%= post.content %></p>
-    <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-        <button type="submit" style="background-color: red; color: white;">Delete Post</button>
-        <a href="/posts/<%= post._id %>">Cancel</a>
-    </form>
+    <div class="container">
+        <h1>Are you sure you want to delete this post?</h1>
+        <h2><%= post.title %></h2>
+        <p><%= post.content %></p>
+        <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+            <button type="submit" class="button" style="background-color: red;">Delete Post</button>
+            <a href="/posts/<%= post._id %>" class="button">Cancel</a>
+        </form>
+    </div>
 </body>
 </html>

@@ -1,14 +1,17 @@
 <%- include ("layout") %>
 <body>
     <%- include ("navigation") %>
-    <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
-        <label for="title">Edit Title</label>
-        <input id="title" name="title" type="text" value="<%= post.title %>" required />
+    <div class="container">
+        <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
+            <label for="title">Edit Title</label>
+            <input id="title" name="title" type="text" class="form-control" value="<%= post.title %>" required />
 
-        <label for="content">Edit Content</label>
-        <textarea id="content" name="content" rows="10" cols="50" required><%= post.content %></textarea>
+            <label for="content">Edit Content</label>
+            <textarea id="content" name="content" rows="10" class="form-control" required><%= post.content %></textarea>
 
-        <button type="submit">Update Post</button>
-    </form>
+            <button type="submit">Update Post</button>
+            <a href="/posts/<%= post._id %>" class="button">Cancel</a>
+        </form>
+    </div>
 </body>
 </html>

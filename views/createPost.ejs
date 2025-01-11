@@ -1,13 +1,15 @@
 <%- include ("layout") %>
 <body>
     <%- include("navigation") %> 
-    <h1>Create a New Blog Post</h1>
-    <form action="/create" method="post">
-        <label for="title">Title</label>
-        <input id="title" name="title" type="text" required/>
-        <label for="content">Your blog post content</label>
-        <textarea id="content" name="content" rows="10" cols="50" required></textarea>
-        <input type="submit" value="Post" />
-    </form>
+    <div class="container">
+        <h1>Create a New Blog Post</h1>
+        <form action="/create" method="post">
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" class="form-control" required/>
+            <label for="content">Your blog post content</label>
+            <textarea id="content" name="content" rows="10" cols="50" class="form-control" required></textarea>
+            <input type="submit" value="Post" />
+        </form>
+    </div>
 </body>
 </html>

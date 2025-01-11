@@ -1,14 +1,18 @@
 <%- include ("layout") %>
 <body>
     <%- include ("navigation") %>
-    <h1>Welcome to the Blog</h1>
-    <% posts.forEach(post => { %>
-        <h2>
-            <a href="/posts/<%= post._id %>"><%= post.title %></a>
-        </h2>
-        <p><%= post.content.substring(0, 100) %>...</p>
-        <a href="/posts/<%= post._id %>">Read more</a>
-        <hr />
-      <% }) %>
+    <div class="container">
+        <h1>Welcome to the Blog</h1>
+        <% posts.forEach(post => { %>
+            <div class="post-preview">
+                <h2>
+                    <a href="/posts/<%= post._id %>"><%= post.title %></a>
+                </h2>
+                <p><%= post.content.substring(0, 100) %>...</p>
+                <a href="/posts/<%= post._id %>">Read more</a>
+                <hr />
+            </div>
+        <% }) %>
+    </div>
 </body>
 </html>
