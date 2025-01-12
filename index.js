@@ -1,5 +1,6 @@
 import express from 'express';
 import router from './routes/routes.js';
+import authRoutes from './routes/authRoutes.js';
 import { dbConnection } from './config/db.js';
 import dotenv from 'dotenv';
 import methodOverride from 'method-override';
@@ -25,6 +26,7 @@ app.use(express.urlencoded( {extended: true}));
 app.use(express.static("public"));
 app.use(methodOverride('_method'));
 app.use("/", router);
+app.use("/", authRoutes); 
 
 
 app.listen(PORT, () => {
