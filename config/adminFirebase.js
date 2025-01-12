@@ -1,3 +1,4 @@
+import admin from "firebase-admin";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -14,5 +15,13 @@ const firebase = {
     "client_x509_cert_url": process.env.FIREBASE_CLIENT_CERT_URL,
     "universe_domain": process.env.FIREBASE_UNIVERSE_DOMAIN
   };
+
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(firebase),
+    });
+    console.log("Firebase Admin Initialized");
+  }
+  
   
   export default firebase;

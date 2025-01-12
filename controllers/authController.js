@@ -1,11 +1,11 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import admin from "firebase-admin";
-const auth = admin.auth();
+import admin from "../config/adminFirebase.js"; 
+import { auth, signInWithEmailAndPassword } from "../config/clientConfigLogin.js"; 
+
 
 const registerUser = async (req, res) => {
     const { email, password } = req.body;
     try {
-      await auth.createUser({ email, password });
+      await admin.auth().createUser({ email, password });
       res.redirect('/login');
     } catch (error) {
       console.error('Error creating new user:', error);
@@ -17,11 +17,8 @@ const registerUser = async (req, res) => {
     const { email, password } = req.body;
 
   try {
-    const clientAuth = getAuth(); 
-    const userCredential = await signInWithEmailAndPassword(clientAuth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const idToken = await userCredential.user.getIdToken(); 
-
-    await auth.verifyIdToken(idToken);
 
     res.cookie('token', idToken, { httpOnly: true, secure: false });
     res.redirect('/dashboard');
