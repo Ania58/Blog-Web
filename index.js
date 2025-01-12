@@ -3,7 +3,15 @@ import router from './routes/routes.js';
 import { dbConnection } from './config/db.js';
 import dotenv from 'dotenv';
 import methodOverride from 'method-override';
+import admin from "firebase-admin";
+import { readFile } from 'fs/promises'; 
+import path from 'path';
+const serviceAccountPath = new URL('./path/to/serviceAccountKey.json', import.meta.url).pathname; 
+const serviceAccount = JSON.parse(await readFile(serviceAccountPath, 'utf8'));
 
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
 
 dotenv.config();
 
