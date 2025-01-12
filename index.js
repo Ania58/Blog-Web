@@ -21,6 +21,10 @@ app.use(express.urlencoded( {extended: true}));
 app.use(cookieParser()); 
 app.use(express.static("public"));
 app.use(methodOverride('_method'));
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = !!req.cookies.token; 
+    next();
+  });
 app.use("/", router);
 app.use("/", authRoutes); 
 

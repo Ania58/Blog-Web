@@ -1,7 +1,10 @@
 <nav>
     <a href="/">Home</a>
-    <a href="/create">Create New Post</a>
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
-    <a href="/logout">Logout</a>
+    <% if (!isAuthenticated) { %>
+      <a href="/register">Register</a>
+      <a href="/login">Login</a>
+    <% } else { %>
+      <a href="/create">Create New Post</a>
+      <a href="/logout">Logout</a>
+    <% } %>
   </nav>

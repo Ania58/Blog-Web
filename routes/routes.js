@@ -8,7 +8,7 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 router.get("/", getPosts);
 router.post("/create", authMiddleware, createPost);
-router.get("/create", (req, res) => res.render("createPost.ejs"));
+router.get("/create", authMiddleware, (req, res) => res.render("createPost.ejs"));
 router.get("/posts/:id", showPostById);
 router.get("/posts/:id/edit", authMiddleware, showUpdateForm);
 router.put("/posts/:id", authMiddleware, updatePost);
