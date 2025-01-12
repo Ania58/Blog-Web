@@ -1,0 +1,21 @@
+<%- include("layout") %>
+<body>
+    <%- include("navigation") %>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="/login" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required />
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required />
+
+            <% if (error) { %>
+                <p class="error-message"><%= error %></p>
+            <% } %>
+
+            <button type="submit" class="button">Login</button>
+        </form>
+    </div>
+</body>
+</html>

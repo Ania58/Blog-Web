@@ -6,6 +6,7 @@ import methodOverride from 'method-override';
 import admin from "firebase-admin";
 import { readFile } from 'fs/promises'; 
 import path from 'path';
+import firebaseAdmin from './config/firebase.js';
 const serviceAccountPath = new URL('./path/to/serviceAccountKey.json', import.meta.url).pathname; 
 const serviceAccount = JSON.parse(await readFile(serviceAccountPath, 'utf8'));
 
