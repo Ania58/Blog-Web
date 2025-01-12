@@ -1,0 +1,13 @@
+<%- include("layout") %>
+<body>
+    <%- include("navigation") %>
+    <div class="container">
+        <h1>Are you sure you want to log out?</h1>
+        <form action="/logout" method="POST">
+          <button type="submit" class="button">Yes, Log Me Out</button>
+        </form>
+        <a href="/" class="button">Cancel and Go to Homepage</a>
+      </div>
+    </div>
+  </div>
+</body>

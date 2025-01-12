@@ -44,4 +44,8 @@ const registerForm = (req, res) => {
     res.render("login.ejs", { error: null });
   };
   
-  export { registerUser, loginUser, logoutUser, registerForm, loginForm }
+  const logoutForm = (req, res) => {
+    res.render("logout.ejs", { error: null });
+  };
+
+  export { registerUser, loginUser, logoutUser, registerForm, loginForm, logoutForm }
