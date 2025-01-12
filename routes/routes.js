@@ -6,20 +6,20 @@ import { getPosts, createPost, showPostById, showUpdateForm, updatePost, showDel
 
 import isCommentOwner from "../middleware/isCommentOwner.js";
 import isPostOwner from "../middleware/isPostOwner.js";
-import authMiddleware from "../middleware/authMiddleware.js";
+import ensureAuthenticated from "../middleware/ensureAuthenticated.js";
 
 router.get("/", getPosts);
-router.post("/create", authMiddleware, createPost);
-router.get("/create", authMiddleware, (req, res) => res.render("createPost.ejs"));
+router.post("/create", ensureAuthenticated, createPost);
+router.get("/create", ensureAuthenticated, (req, res) => res.render("createPost.ejs"));
 router.get("/posts/:id", showPostById);
-router.get("/posts/:id/edit", authMiddleware, showUpdateForm);
-router.put("/posts/:id", authMiddleware, isPostOwner, updatePost);
-router.get("/posts/:id/delete",authMiddleware, showDeleteForm);
-router.delete("/posts/:id", authMiddleware, isPostOwner, deletePost);
-router.post("/posts/:id/comments", authMiddleware, addComment); 
-router.put("/posts/:id/comments/:commentId", authMiddleware, isCommentOwner, updateComment); 
-router.delete("/posts/:id/comments/:commentId", authMiddleware, isCommentOwner, deleteComment);
-router.get("/dashboard", authMiddleware, getPosts);
+router.get("/posts/:id/edit",  ensureAuthenticated, showUpdateForm);
+router.put("/posts/:id", ensureAuthenticated, isPostOwner, updatePost);
+router.get("/posts/:id/delete", ensureAuthenticated, showDeleteForm);
+router.delete("/posts/:id", ensureAuthenticated, isPostOwner, deletePost);
+router.post("/posts/:id/comments", ensureAuthenticated, addComment); 
+router.put("/posts/:id/comments/:commentId", ensureAuthenticated, isCommentOwner, updateComment); 
+router.delete("/posts/:id/comments/:commentId", ensureAuthenticated, isCommentOwner, deleteComment);
+router.get("/dashboard", ensureAuthenticated, getPosts);
 
 
 

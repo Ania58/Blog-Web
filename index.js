@@ -9,6 +9,7 @@ import { readFile } from 'fs/promises';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import './config/adminFirebase.js';
+import authMiddleware from "./middleware/authMiddleware.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
     res.locals.isAuthenticated = !!req.cookies.token; 
     next();
   });
+app.use(authMiddleware);
 app.use("/", router);
 app.use("/", authRoutes); 
 

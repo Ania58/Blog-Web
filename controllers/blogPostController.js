@@ -24,8 +24,9 @@ const createPost = async (req, res) => {
 
 const showPostById = async (req, res) => {
     try {
-        const post = await BlogPost.findById(req.params.id).select('title content comments');
-        res.render("showPost.ejs", { post })
+        const post = await BlogPost.findById(req.params.id).select('title content userUid comments');
+        const user = req.user || null; 
+        res.render("showPost.ejs", { post, user })
     } catch (error) {
         console.error('Error fetching post:', error);
         res.status(500).json({ message: "There was a problem trying to fetch a post" });

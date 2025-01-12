@@ -6,8 +6,10 @@
         <p><%= post.content %></p>
         <hr />
         <div class="buttons">
-            <a href="/posts/<%= post._id %>/edit" class="button">Edit Post</a>
-            <a href="/posts/<%= post._id %>/delete" class="button">Delete Post</a>
+            <% if (user && post.userUid === user.uid) { %>
+                <a href="/posts/<%= post._id %>/edit" class="button">Edit Post</a>
+                <a href="/posts/<%= post._id %>/delete" class="button">Delete Post</a>
+            <% } %>
         </div>
         <form action="/posts/<%= post._id %>/comments" method="POST">
             <label for="username">Name</label>
