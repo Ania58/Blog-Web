@@ -7,7 +7,7 @@ const authMiddleware = (req, res, next) => {
       return res.redirect('/login');
     }
   
-    admin.auth.verifyIdToken(idToken)
+    admin.auth().verifyIdToken(idToken)
       .then(decodedToken => {
         req.user = decodedToken;
         next();

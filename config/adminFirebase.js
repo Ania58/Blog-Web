@@ -24,4 +24,4 @@ const firebase = {
   }
   
   
-  export default firebase;
+  export default admin;

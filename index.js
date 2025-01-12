@@ -18,6 +18,7 @@ const PORT = 3000;
 dbConnection();
 
 app.use(express.urlencoded( {extended: true}));
+app.use(cookieParser()); 
 app.use(express.static("public"));
 app.use(methodOverride('_method'));
 app.use("/", router);
