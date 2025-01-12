@@ -1,5 +1,4 @@
-import admin from "firebase-admin";
-const auth = admin.auth();
+import admin from "../config/adminFirebase.js";
 
 const authMiddleware = (req, res, next) => {
     const idToken = req.cookies.token;
@@ -8,7 +7,7 @@ const authMiddleware = (req, res, next) => {
       return res.redirect('/login');
     }
   
-    auth.verifyIdToken(idToken)
+    admin.auth.verifyIdToken(idToken)
       .then(decodedToken => {
         req.user = decodedToken;
         next();
