@@ -17,6 +17,7 @@ router.delete("/posts/:id", authMiddleware, deletePost);
 router.post("/posts/:id/comments", authMiddleware, addComment); 
 router.put("/posts/:id/comments/:commentId", authMiddleware, updateComment); 
 router.delete("/posts/:id/comments/:commentId", authMiddleware, deleteComment);
+router.get("/dashboard", authMiddleware, getPosts);
 
 
 
