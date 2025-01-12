@@ -13,7 +13,8 @@ const createPost = async (req, res) => {
     try {
         const title = req.body["title"];
         const content = req.body["content"];
-        await BlogPost.create({title, content});
+        const userUid = req.user.uid;
+        await BlogPost.create({title, content, userUid});
         res.redirect("/");
     } catch (error) {
         console.error('Error creating post:', error);
@@ -80,14 +81,16 @@ const deletePost = async (req, res) => {
 
 const addComment = async (req, res) => {
     try {
-        const { username, text } = req.body;
+        const { text } = req.body;
         const postId = req.params.id;
+        const userUid = req.user.uid; 
+        const username = req.user.name || "Anonymous";
         const post = await BlogPost.findById(postId);
 
         if (!post) {
             return res.status(404).send("Post not found");
         }
-        post.comments.push({ username, text });
+        post.comments.push({ username, text, userUid });
         await post.save();
         res.redirect(`/posts/${postId}`);
     } catch (error) {

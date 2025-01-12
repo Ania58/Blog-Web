@@ -10,6 +10,10 @@ const commentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userUid: { 
+    type: String, 
+    required: true },
+
   createdAt: {
     type: Date,
     default: Date.now,
@@ -27,6 +31,10 @@ const blogPostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userUid: { 
+      type: String, 
+      required: true },
+      
     comments: [commentSchema], 
   },
   {
