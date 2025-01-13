@@ -4,6 +4,7 @@ const authMiddleware = (req, res, next) => {
     const idToken = req.cookies.token;
   
     if (!idToken) {
+      req.user = null; 
       res.locals.user = null; 
       next(); 
     } else {
@@ -15,6 +16,7 @@ const authMiddleware = (req, res, next) => {
       })
       .catch(error => {
         console.error('Error verifying token:', error);
+        req.user = null;
         res.locals.user = null; 
         next();
       });

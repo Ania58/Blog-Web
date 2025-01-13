@@ -82,16 +82,18 @@ const deletePost = async (req, res) => {
 
 const addComment = async (req, res) => {
     try {
-        const { text } = req.body;
+        const { text, username } = req.body;
         const postId = req.params.id;
-        const userUid = req.user.uid; 
-        const username = req.user.name || "Anonymous";
+        const userUid = req.user?.uid || null;  
         const post = await BlogPost.findById(postId);
 
         if (!post) {
             return res.status(404).send("Post not found");
         }
-        post.comments.push({ username, text, userUid });
+        if (!username || username.trim() === "") {
+            return res.status(400).send("Username is required");
+          }
+        post.comments.push({ username: username.trim(), text, userUid });
         await post.save();
         res.redirect(`/posts/${postId}`);
     } catch (error) {

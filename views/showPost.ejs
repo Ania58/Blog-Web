@@ -30,13 +30,15 @@
                 <div class="comment-box">
                 <strong><%= comment.username %></strong>
                 <p><%= comment.text %></p>
-                <form action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete this comment?')">Delete</button>
-                </form>
-                <form action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" style="display: inline;">
-                    <input type="text" name="text" placeholder="Edit comment..." class="form-control" required />
-                    <button type="submit">Update</button>
-                </form>
+                <% if (user && comment.userUid === user.uid) { %>
+                    <form action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this comment?')">Delete</button>
+                    </form>
+                    <form action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" style="display: inline;">
+                        <input type="text" name="text" placeholder="Edit comment..." class="form-control" required />
+                        <button type="submit">Update</button>
+                    </form>
+                <% } %>
                 </div>
                 <hr />
             <% }) %>
